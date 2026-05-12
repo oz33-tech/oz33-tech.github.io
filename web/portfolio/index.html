@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Omar Zkiek — Independent Web Designer, Bristol</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent web designer based in Bristol. Custom-built websites for UK trades and small businesses — no templates, no monthly bloat.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Sticky side index -->
+  <aside class="side-index" aria-label="Section index">
+    <a href="#hero" class="si-link active" data-section="00">
+      <span class="si-num">00</span>
+      <span class="si-label">Index</span>
+    </a>
+    <a href="#who" class="si-link" data-section="01">
+      <span class="si-num">01</span>
+      <span class="si-label">Who</span>
+    </a>
+    <a href="#work" class="si-link" data-section="02">
+      <span class="si-num">02</span>
+      <span class="si-label">Work</span>
+    </a>
+    <a href="#how" class="si-link" data-section="03">
+      <span class="si-num">03</span>
+      <span class="si-label">How</span>
+    </a>
+    <a href="#talk" class="si-link" data-section="04">
+      <span class="si-num">04</span>
+      <span class="si-label">Talk</span>
+    </a>
+  </aside>
+
+  <!-- Top status bar -->
+  <header class="status-bar">
+    <div class="sb-left">
+      <span class="sb-dot"></span>
+      <span class="sb-mono">[ AVAILABLE FOR PROJECTS · BRISTOL UK · {{TIME}} ]</span>
+    </div>
+    <div class="sb-right">
+      <a href="mailto:omarzkiek3@gmail.com" class="sb-mono sb-link">omarzkiek3@gmail.com</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO with 3D canvas -->
+    <section class="hero" id="hero">
+      <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <p class="kicker">[ 00 ] / Independent web designer, Bristol</p>
+          <h1>
+            <span class="line">I build</span>
+            <span class="line"><em>properly-made</em></span>
+            <span class="line">websites</span>
+            <span class="line">for UK trades.</span>
+          </h1>
+          <p class="lede">
+            One person, one contract. Custom-coded sites that load fast, read well on a phone, and look like they belong to your business — not like they came out of a template builder.
+          </p>
+          <div class="hero-meta">
+            <div class="meta-cell">
+              <span class="meta-label">Based</span>
+              <span class="meta-value">Bristol · UK</span>
+            </div>
+            <div class="meta-cell">
+              <span class="meta-label">Build from</span>
+              <span class="meta-value">£320</span>
+            </div>
+            <div class="meta-cell">
+              <span class="meta-label">Replies</span>
+              <span class="meta-value">Same day</span>
+            </div>
+          </div>
+          <div class="hero-cta">
+            <a href="#talk" class="btn btn-lime">
+              <span>Start a conversation</span>
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href="#work" class="btn-ghost">[ What I do ]</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <!-- 3D scene rendered into bg-canvas; this is the readout overlay -->
+          <div class="readout">
+            <div class="readout-row">
+              <span class="ro-label">Scene</span>
+              <span class="ro-value">ICOSA_03</span>
+            </div>
+            <div class="readout-row">
+              <span class="ro-label">Frame</span>
+              <span class="ro-value" id="readout-frame">0000</span>
+            </div>
+            <div class="readout-row">
+              <span class="ro-label">Cursor</span>
+              <span class="ro-value" id="readout-cursor">0.00, 0.00</span>
+            </div>
+            <div class="readout-row">
+              <span class="ro-label">Mode</span>
+              <span class="ro-value" id="readout-mode">AUTO</span>
+            </div>
+          </div>
+          <p class="hint mono">Move your cursor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO -->
+    <section class="section" id="who">
+      <div class="section-head">
+        <span class="sh-num">01 / WHO</span>
+        <h2>One person, one project.</h2>
+      </div>
+      <div class="who-grid">
+        <div class="who-photo">
+          <figure>
+            <img src="omar.jpg" alt="Omar Zkiek" />
+          </figure>
+          <p class="cap mono">[ OMAR · BRISTOL · 2026 ]</p>
+        </div>
+        <div class="who-copy">
+          <p class="big">
+            Hi, I'm Omar. I build websites for UK trades and small businesses — usually one page, always custom-coded, never a template builder hiding under a coat of paint.
+          </p>
+          <p>
+            I work alone. That keeps prices honest and lets me actually pick up the phone when a client needs something changed. No project managers, no account team, no monthly retainer with vague "deliverables" — just the person who built your site, available when you need them.
+          </p>
+          <p>
+            What I care about: sites that <em>load fast</em>, <em>read well on a phone</em>, and <em>get the phone to ring</em>. Everything else is decoration.
+          </p>
+          <p class="signoff">— Omar Zkiek</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / SERVICES -->
+    <section class="section dark" id="work">
+      <div class="section-head">
+        <span class="sh-num">02 / WORK</span>
+        <h2>Three sizes, all properly made.</h2>
+      </div>
+      <div class="services">
+        <a class="svc" href="#talk">
+          <header>
+            <span class="svc-id">01</span>
+            <h3>One-pager</h3>
+          </header>
+          <p>Everything on one well-designed page — hero, services, FAQs, contact. The right fit for most trades.</p>
+          <footer>
+            <span class="svc-price">Get a quote</span>
+            <span class="svc-meta">~1 week</span>
+          </footer>
+        </a>
+        <a class="svc" href="#talk">
+          <header>
+            <span class="svc-id">02</span>
+            <h3>Brochure</h3>
+          </header>
+          <p>Up to five pages — dedicated service pages, a project gallery, an about page. For when one page isn't enough.</p>
+          <footer>
+            <span class="svc-price">Get a quote</span>
+            <span class="svc-meta">~2 weeks</span>
+          </footer>
+        </a>
+        <a class="svc" href="#talk">
+          <header>
+            <span class="svc-id">03</span>
+            <h3>Full site</h3>
+          </header>
+          <p>Up to ten pages — individual service pages, project galleries, blog or news, reviews. For businesses with depth.</p>
+          <footer>
+            <span class="svc-price">Get a quote</span>
+            <span class="svc-meta">~3–4 weeks</span>
+          </footer>
+        </a>
+        <a class="svc care" href="#talk">
+          <header>
+            <span class="svc-id">+</span>
+            <h3>Care plan</h3>
+          </header>
+          <p>Hosting, domain, small changes whenever you need them, backups, uptime monitoring. First month free.</p>
+          <footer>
+            <span class="svc-price">£25/mo</span>
+            <span class="svc-meta">Cancel anytime</span>
+          </footer>
+        </a>
+      </div>
+      <p class="footnote mono">[ each project quoted individually · honest, fixed prices · no hidden fees ]</p>
+    </section>
+
+    <!-- HOW / PROCESS -->
+    <section class="section" id="how">
+      <div class="section-head">
+        <span class="sh-num">03 / HOW</span>
+        <h2>From first email to live site.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-n">01</span>
+          <div class="step-body">
+            <h3>First chat</h3>
+            <p>Email or a quick call. You tell me about the business and what you want the site to do.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n">02</span>
+          <div class="step-body">
+            <h3>Quote</h3>
+            <p>Itemised, fixed price. You see exactly what's included before you commit.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n">03</span>
+          <div class="step-body">
+            <h3>Build</h3>
+            <p>Usually about a week. I send you a preview link to review before it goes live.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n">04</span>
+          <div class="step-body">
+            <h3>Go live</h3>
+            <p>Domain pointed, site published, you get the keys. We do a final walk-through together.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n">05</span>
+          <div class="step-body">
+            <h3>Aftercare</h3>
+            <p>Text or email any time you need a change. Most go live within 48 hours.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- TALK / CONTACT -->
+    <section class="section talk" id="talk">
+      <div class="section-head">
+        <span class="sh-num">04 / TALK</span>
+        <h2 class="huge">
+          <a href="mailto:omarzkiek3@gmail.com">
+            omarzkiek3<br/>@gmail.com
+          </a>
+        </h2>
+      </div>
+      <div class="talk-grid">
+        <div>
+          <p class="kicker">[ when ]</p>
+          <p>Replies usually same day during work hours (Mon–Fri, 8:00 – 18:00 UK).</p>
+        </div>
+        <div>
+          <p class="kicker">[ who ]</p>
+          <p>UK trades and small businesses. Bristol and the South West preferred, but I work remotely.</p>
+        </div>
+        <div>
+          <p class="kicker">[ what to send ]</p>
+          <p>A few lines about your business, what you'd like the site to do, anything specific. Phone photos welcome.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="fb-name">OMAR<span class="fb-z">ZKIEK</span></span>
+        <span class="fb-meta mono">Independent web designer · Bristol UK · est. 2026</span>
+      </div>
+      <div class="foot-cols">
+        <a href="#who">01 / Who</a>
+        <a href="#work">02 / Work</a>
+        <a href="#how">03 / How</a>
+        <a href="#talk">04 / Talk</a>
+      </div>
+    </div>
+    <div class="foot-bottom mono">
+      <span>© <span id="y"></span> Omar Zkiek</span>
+      <span>Hand-built in Bristol.</span>
+    </div>
+  </footer>
+
+  <!-- Quick-chat widget -->
+  <button class="chat-toggle" id="chat-toggle" aria-label="Open quick chat">
+    <span class="ct-pulse"></span>
+    <span class="ct-icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+    </span>
+    <span class="ct-label">Quick chat</span>
+  </button>
+
+  <aside class="chat-panel" id="chat-panel" aria-hidden="true">
+    <header class="cp-head">
+      <div class="cp-id">
+        <span class="cp-avatar">OZ</span>
+        <div>
+          <p class="cp-name">Omar Zkiek</p>
+          <p class="cp-status mono"><span class="cp-dot"></span> usually replies same day</p>
+        </div>
+      </div>
+      <button class="cp-close" id="chat-close" aria-label="Close chat">✕</button>
+    </header>
+    <div class="cp-body" id="chat-body">
+      <!-- messages injected by JS -->
+    </div>
+    <div class="cp-presets" id="chat-presets">
+      <!-- preset buttons injected by JS -->
+    </div>
+    <footer class="cp-foot mono">
+      <span>[ scripted assistant · for a real reply use email ]</span>
+    </footer>
+  </aside>
+
+  <!-- Three.js via CDN -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+  <script src="script.js" type="module"></script>
+</body>
+</html>
