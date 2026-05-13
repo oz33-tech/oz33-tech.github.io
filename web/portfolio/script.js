@@ -203,7 +203,7 @@ function tickClock() {
   const d = new Date();
   const hh = String(d.getUTCHours()).padStart(2, '0');
   const mm = String(d.getUTCMinutes()).padStart(2, '0');
-  sb.textContent = `[ AVAILABLE FOR PROJECTS · BRISTOL UK · ${hh}:${mm} UTC ]`;
+  sb.textContent = `[ DIGITAL WORKSHOP · BRISTOL UK · ${hh}:${mm} UTC ]`;
 }
 tickClock();
 setInterval(tickClock, 30000);
