@@ -173,7 +173,7 @@ if (canvas) {
    Side-index scroll spy
    ========================================================= */
 const sideLinks = document.querySelectorAll('.si-link');
-const sections = ['hero','who','work','how','talk'].map(id => document.getElementById(id)).filter(Boolean);
+const sections = ['hero','who','work','systems','how','talk'].map(id => document.getElementById(id)).filter(Boolean);
 
 if ('IntersectionObserver' in window) {
   const map = new Map();
