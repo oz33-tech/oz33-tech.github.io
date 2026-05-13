@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Orchard Lofts — Leaflet (A5, double-sided)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:      #ffffff;
+      --paper-2:    #f3efe9;
+      --paper-3:    #f8f6f2;
+      --ink:        #0e0e0e;
+      --ink-2:      #2a2a2a;
+      --muted:      #6a6a6a;
+      --line:       #e7e3dc;
+      --line-2:     #d8d3ca;
+      --accent:     #a8632a;
+      --sans:       "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #cfcac1; font-family: var(--sans); color: var(--ink); }
+
+    /* ===== Screen layout: show both pages side-by-side ===== */
+    .screen-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 30px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .screen-wrap .label {
+      width: 148mm;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #5b554c;
+      margin-bottom: 6px;
+    }
+    .panel {
+      width: 148mm;
+      background: var(--paper);
+      box-shadow: 0 24px 60px -20px rgba(0,0,0,.35);
+    }
+
+    /* ===== A5 page ===== */
+    .page {
+      width: 148mm;
+      height: 210mm;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+    .page * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    /* ===== FRONT (page 1) ===== */
+    .front {
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+    }
+    .front-photo {
+      position: absolute; inset: 0;
+      background: url("images/hero-aframe.jpg") center 55% / cover no-repeat;
+      filter: saturate(.92) contrast(1.02);
+      opacity: .55;
+    }
+    .front-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(14,14,14,.35) 0%, rgba(14,14,14,.55) 55%, rgba(14,14,14,.92) 100%),
+        radial-gradient(ellipse at 50% 100%, rgba(168,99,42,.32), transparent 60%);
+    }
+    .front-content {
+      position: relative;
+      z-index: 1;
+      padding: 18mm 14mm 14mm;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8mm;
+    }
+    .brand-mark { line-height: 1; }
+    .brand-name { font-size: 19pt; font-weight: 700; letter-spacing: -.01em; }
+    .brand-name em { color: var(--accent); font-style: italic; font-weight: 700; }
+    .brand-est { display: block; margin-top: 4px; font-size: 7pt; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .brand-tag {
+      font-size: 7pt; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600;
+      padding-left: 22px; position: relative;
+      margin-top: 6px;
+    }
+    .brand-tag::before { content: ""; position: absolute; left: 0; top: 50%; width: 16px; height: 1px; background: var(--accent); }
+
+    .front-headline {
+      font-size: 32pt;
+      line-height: 1.02;
+      letter-spacing: -.035em;
+      font-weight: 800;
+      margin: 0 0 5mm;
+    }
+    .front-headline em { color: var(--accent); font-style: italic; font-weight: 800; }
+
+    .front-sub {
+      font-size: 11.5pt;
+      line-height: 1.4;
+      color: rgba(255,255,255,.86);
+      max-width: 110mm;
+      margin: 0 0 7mm;
+    }
+
+    .front-bullets {
+      list-style: none; padding: 0; margin: 0 0 7mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm 8mm;
+    }
+    .front-bullets li {
+      font-size: 9.5pt;
+      color: rgba(255,255,255,.92);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.35;
+    }
+    .front-bullets li::before {
+      content: ""; position: absolute; left: 0; top: 8px;
+      width: 7px; height: 7px;
+      background: var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .front-cta {
+      border-top: 1px solid rgba(255,255,255,.18);
+      padding-top: 6mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6mm;
+    }
+    .cta-left { display: flex; flex-direction: column; gap: 2mm; }
+    .cta-kicker { font-size: 7pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    .cta-phone { font-size: 17pt; font-weight: 700; letter-spacing: -.01em; }
+    .cta-web   { font-size: 9pt; color: rgba(255,255,255,.7); }
+    .cta-badge {
+      flex-shrink: 0;
+      width: 32mm; height: 32mm;
+      border-radius: 50%;
+      background: var(--accent); color: var(--paper);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; line-height: 1.1;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 24px -8px rgba(168,99,42,.6);
+    }
+    .cta-badge .b-top { font-size: 7pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; opacity: .92; }
+    .cta-badge .b-big { font-size: 17pt; font-weight: 800; letter-spacing: -.02em; }
+    .cta-badge .b-bot { font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; opacity: .92; }
+
+    /* ===== BACK (page 2) ===== */
+    .back {
+      background: var(--paper);
+      color: var(--ink);
+      padding: 14mm 12mm;
+      display: flex;
+      flex-direction: column;
+      gap: 6mm;
+    }
+    .back-head {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm;
+      padding-bottom: 4mm;
+      border-bottom: 1px solid var(--line);
+    }
+    .back-head h2 {
+      font-size: 18pt;
+      letter-spacing: -.025em;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.1;
+      max-width: 90mm;
+    }
+    .back-head h2 em { color: var(--accent); font-style: italic; }
+    .back-kicker { font-size: 7pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; padding-left: 22px; position: relative; }
+    .back-kicker::before { content: ""; position: absolute; left: 0; top: 50%; width: 16px; height: 1px; background: var(--accent); }
+
+    .services-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .services-list li {
+      display: grid;
+      grid-template-columns: 10mm 1fr;
+      column-gap: 4mm;
+      padding: 3.5mm 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .services-list li:last-child { border-bottom: none; }
+    .svc-n { font-size: 9pt; color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+    .svc-t { font-size: 10.5pt; font-weight: 600; color: var(--ink); margin: 0 0 1mm; }
+    .svc-d { font-size: 9pt; color: var(--ink-2); line-height: 1.35; margin: 0; }
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2mm;
+    }
+    .photo-strip > div {
+      aspect-ratio: 1 / 1;
+      background-size: cover;
+      background-position: center 55%;
+      border-radius: 1mm;
+    }
+    .ps1 { background-image: url("images/boarded-chimney.jpg"); }
+    .ps2 { background-image: url("images/raised-legs-detail.jpg"); }
+    .ps3 { background-image: url("images/finished-walkway.jpg"); }
+
+    .process-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+      padding: 4mm 0 2mm;
+    }
+    .proc {
+      border-top: 2px solid var(--ink);
+      padding-top: 2mm;
+    }
+    .proc .p-n { font-size: 7pt; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .proc .p-t { font-size: 9.5pt; font-weight: 600; color: var(--ink); margin-top: 1mm; }
+
+    .back-foot {
+      margin-top: auto;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6mm 7mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5mm;
+    }
+    .foot-left .foot-kicker { font-size: 7pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    .foot-left .foot-phone  { font-size: 16pt; font-weight: 700; letter-spacing: -.01em; margin-top: 1mm; }
+    .foot-left .foot-email  { font-size: 9pt; color: rgba(255,255,255,.78); margin-top: 1mm; }
+    .foot-right {
+      text-align: right;
+      font-size: 8.5pt;
+      color: rgba(255,255,255,.7);
+      line-height: 1.4;
+    }
+    .foot-right strong { color: var(--paper); font-weight: 600; }
+
+    /* ===== Print ===== */
+    @page {
+      size: A5;
+      margin: 0;
+    }
+    @media print {
+      html, body { background: var(--paper); }
+      .screen-wrap { padding: 0; gap: 0; display: block; }
+      .screen-wrap .label { display: none; }
+      .panel { box-shadow: none; width: auto; margin: 0; page-break-after: always; }
+      .panel:last-child { page-break-after: auto; }
+      .page { width: 148mm; height: 210mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="screen-wrap">
+    <div>
+      <p class="label">Front · A5 148 × 210 mm</p>
+      <div class="panel">
+        <div class="page front">
+          <div class="front-photo" aria-hidden="true"></div>
+          <div class="front-overlay" aria-hidden="true"></div>
+          <div class="front-content">
+            <div>
+              <div class="brand-row">
+                <div class="brand-mark">
+                  <div class="brand-name"><em>O</em>rchard Lofts</div>
+                  <span class="brand-est">est. the local area</span>
+                </div>
+                <span class="brand-tag">Free survey</span>
+              </div>
+            </div>
+
+            <div>
+              <h1 class="front-headline">Reclaim your loft. <em>Safe storage,</em> ready when you are.</h1>
+              <p class="front-sub">Loft boards, ladders, lights, insulation and membrane roofing — done properly, finished tidy. 1–3 days, one tidy team.</p>
+
+              <ul class="front-bullets">
+                <li>Raised-leg boarding — insulation stays at full depth</li>
+                <li>Foldaway ladder with handrail, fitted in a day</li>
+                <li>LED lights with a switch by the hatch</li>
+                <li>Insulation topped up to current Building Regs (270 mm)</li>
+              </ul>
+            </div>
+
+            <div class="front-cta">
+              <div class="cta-left">
+                <span class="cta-kicker">Call for a free quote</span>
+                <span class="cta-phone">+44 74701014725</span>
+                <span class="cta-web">orchardlofts.co.uk</span>
+              </div>
+              <div class="cta-badge" aria-hidden="true">
+                <span class="b-top">Free</span>
+                <span class="b-big">Quote</span>
+                <span class="b-bot">No pressure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="label">Back · A5 148 × 210 mm</p>
+      <div class="panel">
+        <div class="page back">
+          <header class="back-head">
+            <h2>What we install, <em>day in day out.</em></h2>
+            <span class="back-kicker">Services</span>
+          </header>
+
+          <ol class="services-list">
+            <li>
+              <span class="svc-n">01</span>
+              <div>
+                <p class="svc-t">Loft boarding</p>
+                <p class="svc-d">Raised-leg flooring system you can walk on, store on, even sit on. Insulation underneath stays untouched.</p>
+              </div>
+            </li>
+            <li>
+              <span class="svc-n">02</span>
+              <div>
+                <p class="svc-t">Loft insulation</p>
+                <p class="svc-d">Full top-up to current Building Regs (270 mm). Lower bills, warmer house, higher EPC.</p>
+              </div>
+            </li>
+            <li>
+              <span class="svc-n">03</span>
+              <div>
+                <p class="svc-t">Loft ladders &amp; hatches</p>
+                <p class="svc-d">Foldaway aluminium ladder with handrail. Fits standard openings, safer than what's there now.</p>
+              </div>
+            </li>
+            <li>
+              <span class="svc-n">04</span>
+              <div>
+                <p class="svc-t">Lighting</p>
+                <p class="svc-d">LED panels above the boarded area + a switch right by the hatch. No more torch in your teeth.</p>
+              </div>
+            </li>
+            <li>
+              <span class="svc-n">05</span>
+              <div>
+                <p class="svc-t">Membrane roofing</p>
+                <p class="svc-d">Breathable membrane under the tiles to keep damp out, warmth in, and condensation off your boards.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="photo-strip" aria-hidden="true">
+            <div class="ps1"></div>
+            <div class="ps2"></div>
+            <div class="ps3"></div>
+          </div>
+
+          <div class="process-row">
+            <div class="proc"><div class="p-n">Step 01</div><div class="p-t">Phone call</div></div>
+            <div class="proc"><div class="p-n">Step 02</div><div class="p-t">Free survey</div></div>
+            <div class="proc"><div class="p-n">Step 03</div><div class="p-t">Fixed quote</div></div>
+            <div class="proc"><div class="p-n">Step 04</div><div class="p-t">Install, 1–3 days</div></div>
+          </div>
+
+          <div class="back-foot">
+            <div class="foot-left">
+              <span class="foot-kicker">Free quotes &amp; advice</span>
+              <div class="foot-phone">+44 74701014725</div>
+              <div class="foot-email">jamie@orchardlofts.co.uk</div>
+            </div>
+            <div class="foot-right">
+              <strong>Orchard Lofts</strong><br>
+              Loft boarding &amp; insulation<br>
+              Mon–Fri 7:30–18:00
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
